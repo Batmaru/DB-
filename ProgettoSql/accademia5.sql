@@ -132,3 +132,65 @@ AND a2.progetto = pr.id
 AND a1.persona = p.id 
 AND a2.persona = p.id
 AND a1.id <> a2.id;
+
+SELECT DISTINCT Persona.nome, Persona.cognome, Persona.posizione
+FROM Persona as p, Assenza as a
+WHERE p.posizione = 'Professore Ordinario'
+AND p.id = a.persona
+AND a.tipo = 'Malattia';
+
+
+SELECT DISTINCT Persona.nome, Persona.cognome, Persona.posizione
+From Persona as p, Assenza as A1, Assenza as A2
+WHERE p.posizione = 'Professore Ordinario'
+AND A1.Persona=p.id
+AND A2.Persona=p.id
+AND A1.tipo = 'Malattia'
+AND A2.tipo = 'Malattia'
+AND A1.id <> A2.id;
+
+SELECT DISTINCT Persona.nome, Persona.cognome, Persona.posizione
+FROM Persona, AttivitaNonProgettuale as A
+Where A.persona = persona.id
+AND A.tipo='Didattica'
+AND Persona.posizione = 'Ricercatore';
+
+SELECT DISTINCT p.nome, p.cognome, p.posizione
+FROM Persona as p, AttivitaNonProgettuale as A1, AttivitaNonProgettuale as A2
+WHERE A1.persona = p.id
+AND A2.persona = p.id
+AND A1.tipo = 'Didattica'
+AND A2.tipo = 'Didattica'
+AND A1.id <> A2.id;
+
+SELECT DISTINCT p.nome, p.cognome
+FROM Persona as p, AttivitaProgetto as ap, AttivitaNonProgettuale as anp
+WHERE ap.persona = p.id
+AND anp.persona = p.id
+AND ap.giorno = anp.giorno;
+
+SELECT DISTINCT p.nome, p.cognome, ap.giorno, pr.nome AS nome_progetto, anp.tipo AS tipo_attivita_non_progettuale, ap.oreDurata AS durata_attivita_progettuale, anp.oreDurata AS durata_attivita_non_progettuale
+FROM Persona as p, AttivitaProgetto as ap, AttivitaNonProgettuale as anp, Progetto as pr
+WHERE ap.persona = p.id
+AND anp.persona = p.id
+AND ap.giorno = anp.giorno
+AND ap.progetto = pr.id;
+
+SELECT DISTINCT p.nome, p.cognome
+FROM Persona as p, AttivitaProgetto as ap, Assenza as a
+WHERE ap.persona = p.id
+AND a.persona = p.id
+AND ap.giorno = a.giorno;
+
+SELECT DISTINCT p.nome, p.cognome, ap.giorno, pr.nome AS nome_progetto, a.tipo AS causa_assenza, ap.oreDurata AS durata_attivita_progettuale
+FROM Persona as p, AttivitaProgetto as ap, Assenza as a, Progetto as pr
+WHERE ap.persona = p.id
+AND a.persona = p.id
+AND ap.giorno = a.giorno
+AND ap.progetto = pr.id;
+
+SELECT wp1.nome
+FROM WP as wp1, WP as wp2
+WHERE wp1.nome = wp2.nome
+AND wp1.progetto <> wp2.progetto;
+
