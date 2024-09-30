@@ -101,6 +101,22 @@ WHERE Volo1.codice = ArrPart1.codice
   AND ArrPart2.arrivo IN (SELECT aeroporto FROM LuogoAeroporto WHERE citta = 'New York')
   AND Volo1.comp = Volo2.comp;
 
+--query prof 
+-- select v1.comp as compagnia,
+--   v1.codice as volo1,
+--   v2.codice as volo2,
+--   v1.partenza as partenza,
+--   v1.arrivo as scalo,
+--   v2.arrivo as arrivo
+-- from ArrPart v1, arrpart v2, luogoaeroporto lap, luogoaeroporto Laa 
+-- where v1.arrivo = v2.partenza
+--   and v1.comp = v2.comp
+--   and v1.partenza = lap.aeroporto
+--   and v2.arrivo = laa.aeroporto
+--   and lap.citta = 'Roma'
+--   and laa.citta = 'New York'
+
+
 SELECT DISTINCT Volo.comp
 FROM Volo, ArrPart, Compagnia
 WHERE Volo.codice = ArrPart.codice
