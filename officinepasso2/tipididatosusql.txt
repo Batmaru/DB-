@@ -1,0 +1,50 @@
+
+Creazione dei Domini con Vincoli di Formato:
+
+1. **indirizzodomain** (Indirizzo):
+   - L'indirizzo è validato per seguire un formato del tipo "Via Nome, Numero, CAP Città (Provincia)".
+   - Simboli usati:
+     - [A-Za-z\\s]+: lettere (A-Z, a-z) e spazi.
+     - \\d{5}: 5 cifre per il CAP.
+     - \\(\\): per controllare la provincia tra parentesi.
+   - Regex: ^[A-Za-z\\s]+,\\s*\\d+,\\s*\\d{5}\\s*[A-Za-z\\s]+.*\\([A-Za-z]{2}\\)\$
+
+Semplificazione:
+- Può essere ridotto a "nome di via, numero civico", separati da una virgola:
+  - Regex semplificata: ^[A-Za-z\\s]+,\\s*\\d+
+
+---
+
+2. **codicef** (Codice Fiscale):
+   - Il codice fiscale italiano ha 16 caratteri alfanumerici con un formato preciso.
+   - Simboli usati:
+     - [A-Za-z]{6}: 6 lettere per il nome.
+     - \\d{2}: 2 numeri (anno di nascita).
+     - [A-EHLMPRST]{1}: una lettera che rappresenta il mese.
+   - Regex: ^[A-Za-z]{6}\\d{2}[A-EHLMPRST]{1}\\d{2}[A-Z]{1}\\d{3}[A-Z]{1}\$
+
+Semplificazione:
+- Si può usare una regex più semplice per una stringa di 16 caratteri alfanumerici:
+  - Regex semplificata: ^[A-Za-z0-9]{16}\$
+
+---
+
+3. **ntel** (Numero di Telefono):
+   - Numero di telefono con prefisso internazionale opzionale.
+   - Simboli usati:
+     - \\+?: il prefisso '+' è opzionale.
+     - \\d{1,3}: da 1 a 3 numeri per il prefisso internazionale.
+     - \\d{1,4}: da 1 a 4 numeri per la parte locale del numero.
+     - \\d{4,10}: da 4 a 10 numeri per il numero principale.
+   - Regex: ^\\+?\\d{1,3}\\s?\\d{1,4}\\s?\\d{4,10}\$
+
+Semplificazione:
+- Si può limitare il numero a una sequenza di 7-15 cifre:
+  - Regex semplificata: ^\\d{7,15}\$
+
+---
+
+4. **stringa** (Stringa Generica):
+   - Definisce semplicemente un tipo di stringa generica con una lunghezza massima di 100 caratteri.
+"""
+
