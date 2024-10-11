@@ -59,7 +59,7 @@ create table Metodo_pagamento (
 );
 
 create table Valuta (
-    codice varchar(100)
+    codice varchar(100),
     nome varchar(100) not null,  
     primary key (nome)
 );
