@@ -59,6 +59,7 @@ create table Metodo_pagamento (
 );
 
 create table Valuta (
+    codice varchar(100)
     nome varchar(100) not null,  
     primary key (nome)
 );
@@ -76,7 +77,7 @@ create table Post (
     condizioni cond_usato,
     categoria varchar(100),
     metodopagamento varchar(100),
-    valuta varchar(3) not null,
+    valuta varchar(100) not null,
     primary key (id),
     foreign key (categoria) references Categoria(nome),
     foreign key (metodopagamento) references Metodo_pagamento(nome),
