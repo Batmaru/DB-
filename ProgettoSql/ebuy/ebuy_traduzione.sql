@@ -14,7 +14,7 @@ create type popolarita as enum
 create domain integerGEZ as integer
     check (value >= 0);
 
-create domain realgez as real
+create domain realGEZ as real
     check (value >= 0);
 
 create domain realGZ as real
