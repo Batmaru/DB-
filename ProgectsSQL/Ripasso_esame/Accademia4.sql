@@ -72,51 +72,81 @@ create table Assenza(
 ),
 
 
---Quali sono i cognomi distinti di tutti gli strutturati?
+-- 1. Quali sono i cognomi distinti di tutti gli strutturati?
+--    - Questa query seleziona solo i cognomi dalla tabella Persona, utilizzando "distinct" per ottenere solo valori unici (non ripetuti).
+
 select distinct cognome
 from Persona;
 
---Quali sono i Ricercatori (con nome e cognome)?
+
+-- 2. Quali sono i Ricercatori (con nome e cognome)?
+--    - Selezioniamo i campi nome e cognome dalla tabella Persona, filtrando i risultati per mostrare solo quelli in cui il campo posizione è "Ricercatore".
+
 select nome,cognome
 from Persona
 where posizione='Ricercatore'
 
---Quali sono i Professori Associati il cui cognome comincia con la lettera ‘V’?
+-- 3. Quali sono i Professori Associati il cui cognome comincia con la lettera ‘V’?
+--    - Selezioniamo solo il cognome dalla tabella Persona, filtrando per includere solo i professori associati e per mostrare solo i cognomi che iniziano con "V", utilizzando "UPPER" per ignorare le maiuscole.
+
 select cognome
 from Persona
 where  posizione = 'Professore Associato'
 and UPPER(cognome) like 'V%';
 
---Quali sono i Professori (sia Associati che Ordinari) il cui cognome comincia con la lettera ‘V’ 
+
+-- 4. Quali sono i Professori (sia Associati che Ordinari) il cui cognome comincia con la lettera ‘V’?
+--    - Selezioniamo il cognome dalla tabella Persona, filtrando per includere sia i professori associati che ordinari e per mostrare solo i cognomi che iniziano con "V".
+
 select cognome
 from Persona
 where (posizione = 'Professore Associato' OR posizione='Professore Ordinario')
 and upper(cognome) like 'V%';
 
---Quali sono i Progetti già terminati alla data odierna?
+
+
+-- 5. Quali sono i Progetti già terminati alla data odierna?
+--    - Selezioniamo il nome dalla tabella Progetto, filtrando i progetti in cui la data di fine è minore o uguale alla data attuale.
+
 select nome
 from Progetto
 where fine <= now();
 
---Quali sono i nomi di tutti i Progetti ordinati in ordine crescente di data di inizio?
+
+
+-- 6. Quali sono i nomi di tutti i Progetti ordinati in ordine crescente di data di inizio?
+--    - Selezioniamo il nome dalla tabella Progetto e ordiniamo i risultati in base alla data di inizio in ordine crescente.
+
 select nome
 from progetto
 order by inizio asc;
 
---Quali sono i nomi dei WP ordinati in ordine crescente (per nome)?
+
+-- 7. Quali sono i nomi dei WP ordinati in ordine crescente (per nome)?
+--    - Selezioniamo il nome dalla tabella WP e ordiniamo i risultati in ordine crescente per nome.
+
 select nome
 from WP
 order by nome asc;
 
---Quali sono (distinte) le cause di assenza di tutti gli strutturati?
+
+
+-- 8. Quali sono (distinte) le cause di assenza di tutti gli strutturati?
+--    - Selezioniamo le cause di assenza dalla tabella Assenza, utilizzando "distinct" per ottenere solo valori unici.
+
 select distinct tipo
 from Assenza;
 
---Quali sono (distinte) le tipologie di attività di progetto di tutti gli strutturati?
+
+
+-- 9. Quali sono (distinte) le tipologie di attività di progetto di tutti gli strutturati?
+--    - Selezioniamo le tipologie di attività dalla tabella AttivitaProgetto, utilizzando "distinct" per ottenere solo valori unici.
+
 select distinct tipo
 from AttivitaProgetto;
 
---Quali sono i giorni distinti nei quali del personale ha effettuato attività non progettuali di tipo ‘Didattica’ ? Dare il risultato in ordine crescente.
+-- 10. Quali sono i giorni distinti nei quali il personale ha effettuato attività non progettuali di tipo ‘Didattica’?
+--     - Selezioniamo i giorni dalla tabella AttivitaNonProgettuale in cui il tipo è "Didattica", ordinando i risultati in ordine crescente.
 select distinct giorno
 from AttivitaNonProgettuale
 where tipo='Didattica'

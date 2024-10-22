@@ -75,11 +75,57 @@ create table Assenza(
 select WP.nome,posizione, fine
 from WP as wp, Progetto as p
 where p.nome = 'Pegasus'
-    and wp.progetto = p.id
+    and wp.progetto = p.id;
 
 -- Quali sono il nome, il cognome e la posizione degli strutturati che hanno almeno una attività nel progetto ‘Pegasus’, ordinati per cognome decrescente?
 select p.nome, p.cognome, p.posizione 
 from AttivitaProgetto A, Persona p, progetto pr
 where pr.nome='Pegasus' and A.persona=p.id
-order by p.cognome DESC
+order by p.cognome DESC;
 
+--  Quali sono il nome, il cognome e la posizione degli strutturati che hanno più di una attività nel progetto ‘Pegasus’ ?
+select p.nome, p.cognome, p.posizione
+from Progetto pr, Persona p, AttivitaProgetto a1, AttivitaProgetto a2
+where pr.nome='Pegasus' 
+    and a1.progetto=pr.id
+    and a2.progetto=pr.id
+    and a1.persona=p.id
+    and a2.persona=p.id
+    and a1.id<>a2.id;
+
+--Quali sono il nome, il cognome e la posizione dei Professori Ordinari che hanno fatto almeno una assenza per malattia?
+
+select p.nome, p.cognome, p.posizione
+from Persona p, Assenza a
+where p.posizione = 'Professore Ordinario'
+    and p.id = a.Persona
+    and a.assenza = 'Malattia';
+
+--Quali sono il nome, il cognome e la posizione dei Professori Ordinari che hanno fatto più di una assenza per malattia?
+select p.nome, p.cognome, p.posizione
+from Persona p, Assenza a1, Assenza a2
+where p.posizione = 'Professore Ordinario'
+    and p.id = a1.persona
+    and p.id = a1.persona
+    and a.assenza = 'Malattia'
+    and a1.id<>a2.id;
+
+--Quali sono il nome, il cognome e la posizione dei Ricercatori che hanno almeno un impegno per didattica?
+
+select p.nome, p.cognome, p.posizione
+from Persona p, AttivitaNonProgettuale a
+where a.tipo='Didattica'
+and a.persona  = p.id
+and p.posizione = 'Ricercatore';
+
+--Quali sono il nome, il cognome e la posizione dei Ricercatori che hanno più di un impegno per didattica?
+ select p.nome, p.cognome, p.posizione
+ from Persona p, AttivitaNonProgettuale a1, AttivitaNonProgettuale a2
+ where a1.tipo='Didattica'
+    and a2.tipo='Didattica'
+    and p.posizione = 'Ricercatore';
+    and a1.persona  = p.id
+    and a2.persona = p.id
+    and a1.id<>a2.id
+
+--Quali sono il nome e il cognome degli strutturati che nello stesso giorno hanno sia attività progettuali che attività non progettuali?
