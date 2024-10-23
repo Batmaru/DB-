@@ -107,7 +107,7 @@ from Persona;
 
 -- 2. Quali sono i Ricercatori (con nome e cognome)?
 --    - Selezioniamo i campi nome e cognome dalla tabella Persona, filtrando i risultati per mostrare solo quelli in cui il campo posizione è "Ricercatore".
-select nome, cognome
+select p.nome, cognome
 from Persona
 where posizione='Ricercatore';
 
