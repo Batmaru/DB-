@@ -47,7 +47,16 @@ and p.posizione= 'Ricercatore'
 and  a.tipo= 'Maternita'
 group by p.nome, p.cognome;
 
+with ass as  (
+    select persona, count(giorno) as giorni
+    from Assenza
+    where tipo = 'Maternita'
+    group by persona
+)
 
+select p.nome, p.cognome, giorni 
+from persona p, ass a
+where p.id= a.persona;
 --6. Qual è il budget medio dei progetti nel db [2 punti]
 
 select avg(pr.budget) as budget_medio
