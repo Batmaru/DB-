@@ -215,4 +215,4 @@ WHERE
 
 --     Istruzione SELECT Finale:
 --         Seleziona l'ID, il nome, il cognome e il totale dei giorni di assenza dalla CTE ProfessoriOrdinarie.
---         Filtra i risultati per mostrare solo quei professori ordinari il cui totale dei giorni di assenza supera la media calcolata nella CTE MediaAssenze.
+--         Filtra i risultati per mostrare solo quei professori ordinari il cui totale dei giorni di assenza supera la media calcolata nella CTE MediaAssenze.bu
